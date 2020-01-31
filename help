@@ -1,0 +1,9 @@
+=> create database [database-name]                  to create database
+
+=> list | list database                             to list the existing databases
+
+=> drop database [database-name]                    to delete database
+
+=> exit | CTRL+D                                    to quit the application
+
+=> help                                             to open the documentation
