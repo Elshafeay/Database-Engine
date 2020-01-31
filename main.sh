@@ -41,7 +41,7 @@ do
 
     elif [[ $array[0] =~ "connect" ]]
     then 
-        # ./connect2DB.sh
+        ./connect2DB.sh
 
     elif [[ $array[0] =~ "help" ]]
     then
