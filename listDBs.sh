@@ -2,9 +2,9 @@
 shopt -s nocasematch
 
 tput el1
-if [[ $# < 3 ]] 
+if [[ $# == 2 ]] 
     then
-    if [[ $1 =~ "list" || $2 =~ "database" ]]
+    if [[ $2 =~ ^(databases)$ ]]
         then
             array=`ls DATA`
             if [[ ! -z $array ]]
@@ -17,7 +17,10 @@ if [[ $# < 3 ]]
                 printf "\t${RED}${bold}You don't have any existing database!${normal}${NC}\n"
             fi
             printf ">> "
-    fi
     else
-        printf "${RED}${bold}Wrong input!${NC}${normal}\n>> "
+        printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+    fi
+
+else
+    printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
 fi

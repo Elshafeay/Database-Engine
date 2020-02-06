@@ -3,7 +3,7 @@
 shopt -s nocasematch
 
 tput el1
-if [[ $2=~"database" && ! -z $3 ]]
+if [[ $2 =~ ^(database)$ && ! -z $3 ]]
     then
         if [[ ! -d DATA/$3 ]] 
             then
@@ -17,5 +17,5 @@ if [[ $2=~"database" && ! -z $3 ]]
         fi
     printf ">> "
 else
-    printf "${RED}${bold}Wrong input!${NC}${normal}\n>> "
+    printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
 fi

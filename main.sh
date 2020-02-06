@@ -11,6 +11,7 @@ normal=$(tput sgr0)
 bind -x '"\C-l": clear; printf ">> "' #so we can use ctrl+L to clear the screen
 tput cuu1
 tput ed
+currentDB=""
 
 printf "${YELLOW}${bold}Hi There, take a look at our documentation by typing 'help'\n${normal}${NC}"
 
@@ -19,35 +20,85 @@ if [ ! -d "DATA" ]
     mkdir DATA
 fi
 
+
+function connect2DB {
+    tput el1
+    if [[ $2 =~ ^(to)$ && ! -z $3 ]]
+        then
+            if [[ ! -d DATA/$3 || ! -z $4 ]]
+            then
+                printf "${RED}${bold}There is NO database with that name!${normal}${NC}\n"
+            else
+                if [[ ! -z $currentDB ]]
+                then
+                    if [[ $currentDB =~ $3 ]]
+                    then
+                        printf "\t${RED}${bold}You're already connected to $3!${normal}${NC}\n"
+                    else
+                        printf "\t${YELLOW}${bold}Switched to $3!${normal}${NC}\n"
+                    fi
+                else
+                    printf "\t${YELLOW}${bold}You're now connected to $3!${normal}${NC}\n"
+                fi
+                currentDB=$3
+            fi
+        printf ">> "
+    else
+        printf "${RED}${bold}Bad syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+    fi
+}
+
+function disconnect {
+    tput el1
+    if [[ -z $2 ]]
+        then
+            if [[ -z $currentDB ]]
+            then
+                printf "\t${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
+            else
+                printf "\t${YELLOW}${bold}Disconnected successfully from $currentDB!${normal}${NC}\n"
+                currentDB=""
+            fi
+        printf ">> "
+    else
+        printf "${RED}${bold}Bad syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+    fi
+}
+
+
+
 printf ">> ";
-export bold NC normal BLUE RED YELLOW
+export bold NC normal BLUE RED YELLOW currentDB
 
 while read -e input
 do
     array=($input)
     printf ">> ";
-    
-    if [[ $array[0] =~ "create" ]]
+    if [[ ${array[0]} =~ ^(create)$ ]]
     then
         ./createDB.sh "${array[@]}"
 
-    elif [[ $array[0] =~ "list" ]]
+    elif [[ ${array[0]} =~ ^(list)$ ]]
     then 
         ./listDBs.sh "${array[@]}"
 
-    elif [[ $array[0] =~ "drop" ]]
+    elif [[ ${array[0]} =~ ^(drop)$ ]]
     then 
         ./dropDB.sh "${array[@]}"
 
-    elif [[ $array[0] =~ "connect" ]]
-    then 
-        ./connect2DB.sh
+    elif [[ ${array[0]} =~ ^(disconnect)$ ]]
+        then
+        disconnect "${array[@]}"
 
-    elif [[ $array[0] =~ "help" ]]
+    elif [[ ${array[0]} =~ ^(connect)$ ]]
+    then
+        connect2DB "${array[@]}"
+    
+    elif [[ ${array[0]} =~ ^(help)$ ]]
     then
         ./help.sh
     
-    elif [[ $array[0] =~ "exit" ]]
+    elif [[ ${array[0]} =~ ^(exit)$ ]]
     then
         break 2
         
@@ -58,7 +109,7 @@ do
 
     else
         tput el1
-        printf "${RED}${bold}Wrong input!${NC}${normal}\n>> "        
+        printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "        
     fi
 done
 
