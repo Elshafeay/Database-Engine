@@ -116,9 +116,13 @@ do
     then 
         ./listDBs.sh "${array[@]}"
 
-    elif [[ ${array[0]} =~ ^(drop)$ ]]
+    elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(database)$ ]]
     then 
-        dropDB "${array[@]}"
+        ./dropDB.sh "${array[@]}"
+
+    elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(table)$ ]]
+    then
+	./dropTable.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(select)$ ]]
     then 
