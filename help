@@ -17,5 +17,10 @@
 
 => help                                             to open the documentation
 
+=> list tables					    to list the current database tables
+
+=> drop table [table-name]			    to delete a table from the current database
+
+=> select all from [table-name]                     to display the table content
 
 ==============================Documentation==============================

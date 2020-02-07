@@ -112,9 +112,13 @@ do
     then
         ./createDB.sh "${array[@]}"
 
-    elif [[ ${array[0]} =~ ^(list)$ ]]
+    elif [[ ${array[0]} =~ ^(list)$ && ${array[1]} =~ ^(databases)$ ]]
     then 
         ./listDBs.sh "${array[@]}"
+    
+    elif [[ ${array[0]} =~ ^(list)$ && ${array[1]} =~ ^(tables)$ ]]
+    then 
+        ./listTable.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(database)$ ]]
     then 
