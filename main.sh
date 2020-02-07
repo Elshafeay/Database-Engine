@@ -86,6 +86,11 @@ do
     then 
         ./dropDB.sh "${array[@]}"
 
+    elif [[ ${array[0]} =~ ^(select)$ ]]
+    then 
+        ./select.sh "${array[@]}"
+
+
     elif [[ ${array[0]} =~ ^(disconnect)$ ]]
         then
         disconnect "${array[@]}"
