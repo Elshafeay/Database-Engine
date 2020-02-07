@@ -4,7 +4,7 @@ shopt -s nocasematch
 shopt -s extglob
 
 tput el1
-if [[ $2 =~ ^(database)$ && ! -z $3 ]]
+if [[ ! -z $3 ]]
     then
         if [[ ! -z $4 ]]
             then

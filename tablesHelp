@@ -1,0 +1,20 @@
+===============================Documentation===============================
+
+
+=> ([column-name] [column-type], ...)        this is the only acceptable format
+
+=> cancel | CTRL+D                           to cancel the table creation and go back to main menu
+
+=> help                                      to open the tables' documentation
+
+
+			#### SOME INFO ####
+
+** Columns names are case insensitive
+** Columns names can't be repeated
+** Columns names can't start with anything execpt an alphabetic character
+** Columns names can't have special characters
+** The only supported types for now are (int, string)
+
+
+===============================Documentation===============================

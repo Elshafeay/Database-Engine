@@ -33,7 +33,7 @@ function connect2DB {
                 then
                     if [[ $currentDB =~ $3 ]]
                     then
-                        printf "\t${RED}${bold}You're already connected to $3!${normal}${NC}\n"
+                        printf "${RED}${bold}You're already connected to $3!${normal}${NC}\n"
                     else
                         printf "\t${YELLOW}${bold}Switched to $3!${normal}${NC}\n"
                     fi
@@ -54,7 +54,7 @@ function disconnect {
         then
             if [[ -z $currentDB ]]
             then
-                printf "\t${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
+                printf "${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
             else
                 printf "\t${YELLOW}${bold}Disconnected successfully from $currentDB!${normal}${NC}\n"
                 currentDB=""
@@ -65,7 +65,41 @@ function disconnect {
     fi
 }
 
+function showDB {
+    tput el1
+    if [[ -z $currentDB ]]
+    then
+        printf "${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
+    else
+        printf "\t${YELLOW}${bold}You're connected to $currentDB!${normal}${NC}\n"
+    fi
+    printf ">> "
+}
 
+function dropDB {
+    tput el1
+    if [[ $2 =~ ^(database)$ && ! -z $3 ]]
+        then
+            if [[ ! -d DATA/$3 ]] 
+                then
+                printf "${RED}${bold}There is NO database with that name!${normal}${NC}\n"
+            else
+                if [[ $currentDB == $3 ]]
+                then
+                    disconnect
+                    tput el1
+                fi
+                rm -r DATA/$3
+                if [[ $? -eq 0 ]]
+                then
+                    printf "\t${YELLOW}${bold}Deleted Successfully!${normal}${NC}\n"
+                fi
+            fi
+        printf ">> "
+    else
+        printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+    fi
+}
 
 printf ">> ";
 export bold NC normal BLUE RED YELLOW currentDB
@@ -74,7 +108,7 @@ while read -e input
 do
     array=($input)
     printf ">> ";
-    if [[ ${array[0]} =~ ^(create)$ ]]
+    if [[ ${array[0]} =~ ^(create)$ && ${array[1]} =~ ^(database)$ ]]
     then
         ./createDB.sh "${array[@]}"
 
@@ -84,12 +118,11 @@ do
 
     elif [[ ${array[0]} =~ ^(drop)$ ]]
     then 
-        ./dropDB.sh "${array[@]}"
+        dropDB "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(select)$ ]]
     then 
         ./select.sh "${array[@]}"
-
 
     elif [[ ${array[0]} =~ ^(disconnect)$ ]]
         then
@@ -99,10 +132,18 @@ do
     then
         connect2DB "${array[@]}"
     
+    elif [[ ${array[0]} =~ ^(db)$ && -z ${array[1]} ]]
+    then
+        showDB
+    
+    elif [[ ${array[0]} =~ ^(create)$ && ${array[1]} =~ ^(table)$ ]]
+    then
+        ./createTable.sh "${array[@]}"
+    
     elif [[ ${array[0]} =~ ^(help)$ ]]
     then
         ./help.sh
-    
+
     elif [[ ${array[0]} =~ ^(exit)$ ]]
     then
         break 2
