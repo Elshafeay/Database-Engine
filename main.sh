@@ -70,6 +70,32 @@ function showDB {
     fi
 }
 
+function dropDatabases {
+tput el1
+
+if [[ $# == 3 ]]
+then
+		if [[ ! -z "$currentDB" ]]
+			then
+                disconnect
+                tput el1
+		fi	
+			if [[ -z "$(ls -A DATA)" ]] 
+		    then
+				printf "\t${RED}${bold}There is NO databases to remove!${normal}${NC}\n"	
+        	else 
+			rm -r DATA/*
+				if [[ $? -eq 0 ]]
+		        	then
+		            	printf "\t${YELLOW}${bold}Deleted Successfully!${normal}${NC}\n"  
+			fi
+		fi
+else
+			printf "\t${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n "
+fi
+
+} 
+
 function dropDB {
     tput el1
     if [[ $2 =~ ^(database)$ && ! -z $3 ]]
@@ -94,6 +120,8 @@ function dropDB {
     fi
 }
 
+
+
 export bold NC normal BLUE RED YELLOW currentDB
 
 while  read -p ">> " -e input
@@ -113,7 +141,7 @@ do
 
     elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(database)$ ]]
     then 
-        ./dropDB.sh "${array[@]}"
+        dropDB "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(table)$ ]]
     then
@@ -139,9 +167,17 @@ do
     then
         ./createTable.sh "${array[@]}"
     	
-	elif [[ ${array[0]} =~ ^(insert)$ && ${array[1]} =~ ^(into)$ ]]
-	then
+    elif [[ ${array[0]} =~ ^(insert)$ && ${array[1]} =~ ^(into)$ ]]
+    then
 		./insert.sh "${array[@]}"
+
+		elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(all)$ && ${array[2]} =~ ^(databases)$ ]]
+    then
+        dropDatabases "${array[@]}"
+
+		elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(all)$ && ${array[2]} =~ ^(tables)$ ]]
+    then
+        ./dropTables.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(help)$ ]]
     then
