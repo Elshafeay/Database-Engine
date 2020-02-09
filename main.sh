@@ -71,28 +71,23 @@ function showDB {
 }
 
 function dropDatabases {
-tput el1
-
-if [[ $# == 3 ]]
-then
-		if [[ ! -z "$currentDB" ]]
-			then
-                disconnect
-                tput el1
-		fi	
-			if [[ -z "$(ls -A DATA)" ]] 
-		    then
-				printf "\t${RED}${bold}There is NO databases to remove!${normal}${NC}\n"	
-        	else 
-			rm -r DATA/*
-				if [[ $? -eq 0 ]]
-		        	then
-		            	printf "\t${YELLOW}${bold}Deleted Successfully!${normal}${NC}\n"  
-			fi
-		fi
-else
-			printf "\t${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n "
-fi
+    
+    tput el1
+    if [[ ! -z "$currentDB" ]]
+        then
+            disconnect
+            tput el1
+    fi	
+        if [[ -z "$(ls -A DATA)" ]] 
+        then
+            printf "\t${RED}${bold}There is NO databases to delete!${normal}${NC}\n"	
+        else 
+        rm -r DATA/*
+            if [[ $? -eq 0 ]]
+                then
+                    printf "\t${YELLOW}${bold}Deleted Successfully!${normal}${NC}\n"  
+        fi
+    fi
 
 } 
 
@@ -173,7 +168,7 @@ do
 
 		elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(all)$ && ${array[2]} =~ ^(databases)$ ]]
     then
-        dropDatabases "${array[@]}"
+        dropDatabases
 
 		elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(all)$ && ${array[2]} =~ ^(tables)$ ]]
     then

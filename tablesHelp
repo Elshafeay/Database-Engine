@@ -1,11 +1,11 @@
 ===============================Documentation===============================
 
 
-=> ([column-name] [column-type], ...)        this is the only acceptable format
+=> ([column-name] [column-type], ...)           this is the only acceptable format
 
-=> cancel			                         to cancel the table creation and go back to main menu
+=> cancel                                       to cancel the table creation and go back to main menu
 
-=> help                                      to open the tables' documentation
+=> help                                         to open the tables' documentation
 
 
 			#### SOME INFO ####
