@@ -16,11 +16,10 @@ if [[ $# == 2 ]]
             else
                 printf "\t${RED}${bold}You don't have any existing database!${normal}${NC}\n"
             fi
-            printf ">> "
     else
-        printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+        printf "\t${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n"
     fi
 
 else
-    printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+    printf "\t${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n"
 fi

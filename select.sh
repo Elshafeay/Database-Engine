@@ -3,24 +3,22 @@
 shopt -s nocasematch
 tput el1
 
-if [[ $# == 4 ]] 
+if [[ $# == 4 ]]
     then
-if [[ ! -z $2 && $3 =~ ^(from)$ && $4 =~ ^(dfile)$ ]]
-	then
+    if [[ $3 =~ ^(from)$ && ! -z $4 ]]
+    then
+        array=($(cut -d: -f1 DATA/$currentDB/$4.metadata))
+        if [[ $2 =~ ^(all)$ ]]
+        then
+            printf "\n*==============================$4==============================*\n"
+            awk 'BEGIN {FS=":"} {if(NR>0) printf "|\t"$1"\t\t"} END{printf "\n"}' "DATA/$currentDB/$4.metadata"
+            awk 'BEGIN {FS=":";OFS="\t\t|\t";ORS="\n"} {$1=$1; printf "|\t"; printf substr($0,1,length($0))"\n"}' "DATA/$currentDB/$4"
+            printf "\n*==============================$4==============================*\n"
 
-	
-case $2 in
-"all")
-awk -F: 'BEGIN{printf "\n+-------+---------------------+---------------+---------+\n"; printf "|  ID   |        Name         |    Position   |  Salary |\n"; sline="+-------+---------------------+---------------+---------+"; print sline}{printf("| %5d | %19s | %13s | %7d |\n", $1,$2,$3,$4);}END{print sline}' ./DATA/nnnn/dfile
-;;
-*)
-printf "${RED}${bold}The items that you want to display is not clear!${NC}${normal}\n"
-;;
-esac
-else	
-printf "${RED}${bold}Wrong input!${NC}${normal}\n"
-fi
+        fi
+    else
+        printf "\t${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n"
+    fi
 else
-printf "${RED}${bold}Please enter the full syntax!${NC}${normal}\n"
+    printf "\t${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n"
 fi
-printf ">> "

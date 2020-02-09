@@ -8,9 +8,6 @@ BLUE='\033[0;34m'
 NC='\033[0m' #No Color
 bold=$(tput bold)
 normal=$(tput sgr0)
-bind -x '"\C-l": clear; printf ">> "' #so we can use ctrl+L to clear the screen
-tput cuu1
-tput ed
 currentDB=""
 
 printf "${YELLOW}${bold}Hi There, take a look at our documentation by typing 'help'\n${normal}${NC}"
@@ -27,13 +24,13 @@ function connect2DB {
         then
             if [[ ! -d DATA/$3 || ! -z $4 ]]
             then
-                printf "${RED}${bold}There is NO database with that name!${normal}${NC}\n"
+                printf "\t${RED}${bold}There is NO database with that name!${normal}${NC}\n"
             else
                 if [[ ! -z $currentDB ]]
                 then
                     if [[ $currentDB =~ $3 ]]
                     then
-                        printf "${RED}${bold}You're already connected to $3!${normal}${NC}\n"
+                        printf "\t${RED}${bold}You're already connected to $3!${normal}${NC}\n"
                     else
                         printf "\t${YELLOW}${bold}Switched to $3!${normal}${NC}\n"
                     fi
@@ -42,9 +39,8 @@ function connect2DB {
                 fi
                 currentDB=$3
             fi
-        printf ">> "
     else
-        printf "${RED}${bold}Bad syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+        printf "\t${RED}${bold}Bad syntax! For more details check the documentation by typing 'help'${NC}${normal}\n"
     fi
 }
 
@@ -54,14 +50,13 @@ function disconnect {
         then
             if [[ -z $currentDB ]]
             then
-                printf "${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
+                printf "\t${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
             else
                 printf "\t${YELLOW}${bold}Disconnected successfully from $currentDB!${normal}${NC}\n"
                 currentDB=""
             fi
-        printf ">> "
     else
-        printf "${RED}${bold}Bad syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+        printf "\t${RED}${bold}Bad syntax! For more details check the documentation by typing 'help'${NC}${normal}\n"
     fi
 }
 
@@ -69,11 +64,10 @@ function showDB {
     tput el1
     if [[ -z $currentDB ]]
     then
-        printf "${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
+        printf "\t${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
     else
         printf "\t${YELLOW}${bold}You're connected to $currentDB!${normal}${NC}\n"
     fi
-    printf ">> "
 }
 
 function dropDB {
@@ -82,7 +76,7 @@ function dropDB {
         then
             if [[ ! -d DATA/$3 ]] 
                 then
-                printf "${RED}${bold}There is NO database with that name!${normal}${NC}\n"
+                printf "\t${RED}${bold}There is NO database with that name!${normal}${NC}\n"
             else
                 if [[ $currentDB == $3 ]]
                 then
@@ -95,19 +89,16 @@ function dropDB {
                     printf "\t${YELLOW}${bold}Deleted Successfully!${normal}${NC}\n"
                 fi
             fi
-        printf ">> "
     else
-        printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+        printf "\t\t${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n"
     fi
 }
 
-printf ">> ";
 export bold NC normal BLUE RED YELLOW currentDB
 
-while read -e input
+while  read -p ">> " -e input
 do
     array=($input)
-    printf ">> ";
     if [[ ${array[0]} =~ ^(create)$ && ${array[1]} =~ ^(database)$ ]]
     then
         ./createDB.sh "${array[@]}"
@@ -163,7 +154,7 @@ do
 
     else
         tput el1
-        printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "        
+        printf "\t${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n"
     fi
 done
 

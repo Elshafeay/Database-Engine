@@ -4,4 +4,4 @@ tput el1
 printf "\n"
 cat help
 
-printf "\n\n>> "
+printf "\n\n"

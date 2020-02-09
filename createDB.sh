@@ -8,7 +8,7 @@ if [[ ! -z $3 ]]
     then
         if [[ ! -z $4 ]]
             then
-            printf "${RED}${bold}Database name can't have special characters!${NC}${normal}\n>> "
+            printf "\t${RED}${bold}Database name can't have special characters!${NC}${normal}\n"
             exit
         fi
         if [[ ${3:0:1} == [[:alpha:]] ]]
@@ -17,7 +17,7 @@ if [[ ! -z $3 ]]
                 +([[:alnum:]]))
                     if [[ -d DATA/$3 ]] 
                     then
-                        printf "${RED}${bold}There is already a database with the same name!${normal}${NC}\n"
+                        printf "\t${RED}${bold}There is already a database with the same name!${normal}${NC}\n"
                     else
                         mkdir DATA/$3;
                         if [[ $? -eq 0 ]]
@@ -26,14 +26,12 @@ if [[ ! -z $3 ]]
                         fi
                     fi
                 ;;
-                *)  printf "${RED}${bold}Database name can't have special characters!${normal}${NC}\n"
+                *)  printf "\t${RED}${bold}Database name can't have special characters!${normal}${NC}\n"
                 ;;
             esac
         else
-            printf "${RED}${bold}Database name must start with a character!${normal}${NC}\n"
+            printf "\t${RED}${bold}Database name must start with a character!${normal}${NC}\n"
         fi
-    printf ">> "
-
 else
-    printf "${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n>> "
+    printf "\t${RED}${bold}Bad Syntax! For more details check the documentation by typing 'help'${NC}${normal}\n"
 fi
