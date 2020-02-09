@@ -3,7 +3,7 @@
 
 => ([column-name] [column-type], ...)        this is the only acceptable format
 
-=> cancel | CTRL+D                           to cancel the table creation and go back to main menu
+=> cancel			                         to cancel the table creation and go back to main menu
 
 => help                                      to open the tables' documentation
 
