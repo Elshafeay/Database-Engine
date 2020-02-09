@@ -138,7 +138,11 @@ do
     elif [[ ${array[0]} =~ ^(create)$ && ${array[1]} =~ ^(table)$ ]]
     then
         ./createTable.sh "${array[@]}"
-    
+    	
+	elif [[ ${array[0]} =~ ^(insert)$ && ${array[1]} =~ ^(into)$ ]]
+	then
+		./insert.sh "${array[@]}"
+
     elif [[ ${array[0]} =~ ^(help)$ ]]
     then
         ./help.sh
