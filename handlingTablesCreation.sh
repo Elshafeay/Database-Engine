@@ -4,7 +4,7 @@ shopt -s nocasematch
 shopt -s extglob
 
 printf "\t${YELLOW}${bold}Enter your columns in the format ([column-name] [column-type], ...)\n\tand for more details type 'help'${NC}${normal}\n"
-while read -p ">> " -e input
+while read -p "(Creation Mode)>> " -e input
 do
 
 #### if he wanted to cancel that table and get back to main menu ####

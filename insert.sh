@@ -16,7 +16,7 @@ then
             then
             ./handlingInsertIntable.sh $3
         else
-            printf "\t${RED}${bold}There is no table has this name!${normal}${NC}\n"
+            printf "\t${RED}${bold}There is NO table with that name!${normal}${NC}\n"
         fi
     fi
 else

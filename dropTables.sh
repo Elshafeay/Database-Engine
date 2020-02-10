@@ -19,7 +19,7 @@ then
 		            	printf "\t${YELLOW}${bold}Deleted Successfully!${normal}${NC}\n"
 		        fi
 	else
-		printf "\t${RED}${bold}There is NO tables to remove!${normal}${NC}\n"	
+		printf "\t${RED}${bold}There is NO tables to delete!${normal}${NC}\n"	
 	fi
 	fi
 else

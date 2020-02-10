@@ -1,31 +1,52 @@
 ==============================Documentation==============================
 
 
-=> create database [database-name]                  to create database
+=> create database [database-name]                      to create database
 
-=> list databases                                   to list the existing databases
 
-=> drop database [database-name]                    to delete database
+=> list databases                                       to list the existing databases
 
-=> connect to [database-name]                       to connect to database
 
-=> disconnect                                       to disconnect from the current database
+=> drop database [database-name]                        to delete database
 
-=> drop all databases                               to display the table content
 
-=> create table [table-name]                        to connect to database
+=> connect to [database-name]                           to connect to database
 
-=> list tables                                      to list the current database tables
 
-=> drop table [table-name]                          to delete a table from the current database
+=> db                                                   to display the current database
 
-=> select all from [table-name]                     to display the table content
 
-=> drop all tables                                  to display the table content
+=> disconnect                                           to disconnect from the current database
 
-=> exit | CTRL+D                                    to quit the application
 
-=> help                                             to open the documentation
+=> drop all databases                                   to delete all databases
+
+
+=> create table [table-name]                            to connect to database
+
+
+=> list tables                                          to list the current database tables
+
+
+=> drop table [table-name]                              to delete a table from the current database
+
+
+=> insert into [table-name]                             to insert into a table from the current database
+
+
+=> delete from [table-name] where RN = [Row-Number]     to delete a specific row from a table
+
+
+=> select all from [table-name]                         to display the table content
+
+
+=> drop all tables                                      to delete all tables
+
+
+=> exit | CTRL+D                                        to quit the application
+
+
+=> help                                                 to open the documentation
 
 
 ==============================Documentation==============================

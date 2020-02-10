@@ -166,6 +166,10 @@ do
     then
 		./insert.sh "${array[@]}"
 
+    elif [[ ${array[0]} =~ ^(delete)$ && ${array[1]} =~ ^(from)$ ]]
+    then
+		./deleteFrom.sh "${array[@]}"
+
 		elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(all)$ && ${array[2]} =~ ^(databases)$ ]]
     then
         dropDatabases
@@ -173,6 +177,10 @@ do
 		elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(all)$ && ${array[2]} =~ ^(tables)$ ]]
     then
         ./dropTables.sh "${array[@]}"
+
+    elif [[ ${array[0]} =~ ^(update)$ ]]
+    then
+        ./update.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(help)$ ]]
     then

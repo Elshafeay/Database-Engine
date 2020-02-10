@@ -21,7 +21,7 @@ done
 printf "), ...]\n\tand for more details type 'help'${NC}${normal}\n"
 
 
-while read -p ">> " -e input
+while read -p "(Insertion Mode)>> " -e input
 do
 
 #### if he wanted to cancel that table and get back to main menu ####
@@ -90,12 +90,13 @@ do
                         continue 5
                         ;;
                     esac
-                # else
-                #     if [[ ${#temparr[i]} > 15 ]]
-                #     then
-                #         printf "\t${RED}${bold}String Field can't have more than 15 characters in the mean time! for more details type 'help'${NC}${normal}\n"
-                #         continue 5
-                #     fi
+                else
+                    case ${temparr[i]} in 
+                        !(+([[:alnum:]])))
+                        printf "\t${RED}${bold}Strings can't have special characters for now! for more details type 'help'${NC}${normal}\n"
+                        continue 5
+                        ;;
+                    esac
                 fi
             done
         done
