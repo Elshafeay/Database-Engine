@@ -50,7 +50,7 @@ function disconnect {
         then
             if [[ -z $currentDB ]]
             then
-                printf "\t${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
+                printf "\t${RED}${bold}You're not connected to any databases!${normal}${NC}\n"
             else
                 printf "\t${YELLOW}${bold}Disconnected successfully from $currentDB!${normal}${NC}\n"
                 currentDB=""
@@ -64,7 +64,7 @@ function showDB {
     tput el1
     if [[ -z $currentDB ]]
     then
-        printf "\t${RED}${bold}You're already not connected to any databases!${normal}${NC}\n"
+        printf "\t${RED}${bold}You're not connected to any databases!${normal}${NC}\n"
     else
         printf "\t${YELLOW}${bold}You're connected to $currentDB!${normal}${NC}\n"
     fi
@@ -124,15 +124,15 @@ do
     array=($input)
     if [[ ${array[0]} =~ ^(create)$ && ${array[1]} =~ ^(database)$ ]]
     then
-        ./createDB.sh "${array[@]}"
+        ./scripts/createDB.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(list)$ && ${array[1]} =~ ^(databases)$ ]]
     then 
-        ./listDBs.sh "${array[@]}"
+        ./scripts/listDBs.sh "${array[@]}"
     
     elif [[ ${array[0]} =~ ^(list)$ && ${array[1]} =~ ^(tables)$ ]]
     then 
-        ./listTable.sh "${array[@]}"
+        ./scripts/listTable.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(database)$ ]]
     then 
@@ -140,11 +140,11 @@ do
 
     elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(table)$ ]]
     then
-	./dropTable.sh "${array[@]}"
+	    ./scripts/dropTable.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(select)$ ]]
     then 
-        ./select.sh "${array[@]}"
+        ./scripts/select.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(disconnect)$ ]]
         then
@@ -160,15 +160,15 @@ do
     
     elif [[ ${array[0]} =~ ^(create)$ && ${array[1]} =~ ^(table)$ ]]
     then
-        ./createTable.sh "${array[@]}"
+        ./scripts/createTable.sh "${array[@]}"
     	
     elif [[ ${array[0]} =~ ^(insert)$ && ${array[1]} =~ ^(into)$ ]]
     then
-		./insert.sh "${array[@]}"
+		./scripts/insert.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(delete)$ && ${array[1]} =~ ^(from)$ ]]
     then
-		./deleteFrom.sh "${array[@]}"
+		./scripts/deleteFrom.sh "${array[@]}"
 
 		elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(all)$ && ${array[2]} =~ ^(databases)$ ]]
     then
@@ -176,15 +176,15 @@ do
 
 		elif [[ ${array[0]} =~ ^(drop)$ && ${array[1]} =~ ^(all)$ && ${array[2]} =~ ^(tables)$ ]]
     then
-        ./dropTables.sh "${array[@]}"
+        ./scripts/dropTables.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(update)$ ]]
     then
-        ./update.sh "${array[@]}"
+        ./scripts/update.sh "${array[@]}"
 
     elif [[ ${array[0]} =~ ^(help)$ ]]
     then
-        ./help.sh
+        ./scripts/help.sh
 
     elif [[ ${array[0]} =~ ^(exit)$ ]]
     then

@@ -3,7 +3,7 @@
 shopt -s nocasematch
 shopt -s extglob
 
-printf "\t${YELLOW}${bold}Enter your columns in the format ([column-name] [column-type], ...)\n\tand for more details type 'help'${NC}${normal}\n"
+printf "\t${YELLOW}${bold}Enter your columns in the format (<column-name> <column-type>, ...)\n\tand for more details type 'help'${NC}${normal}\n"
 while read -p "(Creation Mode)>> " -e input
 do
 
@@ -16,7 +16,7 @@ do
         then
         tput el1
         printf "\n"
-        cat tablesHelp
+        cat docs/tablesHelp
         continue
     elif [[ -z $input ]]
         then

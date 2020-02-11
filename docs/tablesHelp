@@ -1,7 +1,10 @@
 ===============================Documentation===============================
 
 
-=> ([column-name] [column-type], ...)           this is the only acceptable format
+=> (<column-name> <column-type>, ...)           this is the only acceptable format
+
+(example)=>> (id int, name string, address string)
+
 
 => cancel                                       to cancel the table creation and go back to main menu
 

@@ -14,7 +14,7 @@ then
         fi
         if [[ -f DATA/$currentDB/$3 ]] 
             then
-            ./handlingInsertIntable.sh $3
+            ./scripts/handlingInsertIntable.sh $3
         else
             printf "\t${RED}${bold}There is NO table with that name!${normal}${NC}\n"
         fi

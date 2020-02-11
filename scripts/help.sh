@@ -2,6 +2,6 @@
 
 tput el1
 printf "\n"
-cat help
+cat docs/help
 
 printf "\n\n"

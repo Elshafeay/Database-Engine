@@ -19,7 +19,7 @@ if [[ ! -z $3 && -z $4 ]]
                     then
                         printf "\t${RED}${bold}There is already a table with the same name!${normal}${NC}\n"
                     else
-                        ./handlingTablesCreation.sh $3
+                        ./scripts/handlingTablesCreation.sh $3
                     fi
                 ;;
                 *)  printf "\t${RED}${bold}Table name can't have special characters!${normal}${NC}\n"

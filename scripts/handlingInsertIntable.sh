@@ -9,16 +9,16 @@ IFS=',' read -ra arrayOfCols <<< "$cols"
 IFS=',' read -ra arrayOfTypes <<< "$types"
 IFS=' '
 
-printf "\t${YELLOW}${bold}Enter your data in the format [("
+printf "\t${YELLOW}${bold}Enter your data in the format [ ("
 for (( i=0; i<${#arrayOfCols[@]}; i++ ))
 do  
-    printf "${arrayOfCols[i]}<${arrayOfTypes[i]}>"
+    printf "${arrayOfCols[i]} <${arrayOfTypes[i]}>"
     if [[ $i < $((${#arrayOfCols[@]}-1)) ]]
     then
         printf ":"
     fi
 done
-printf "), ...]\n\tand for more details type 'help'${NC}${normal}\n"
+printf "), ... ]\n\tand for more details type 'help'${NC}${normal}\n"
 
 
 while read -p "(Insertion Mode)>> " -e input
@@ -32,7 +32,7 @@ do
         then
         tput el1
         printf "\n"
-        cat insertionHelp
+        cat docs/insertionHelp
         continue
     elif [[ -z $input ]]
         then
